@@ -36,6 +36,9 @@ public class Mahasiswa {
         this.tempatLahir = tempatLahir;
         this.totalSKS = 0;
     }
+    private void test () {
+        System.out.println("nannana");
+    }
 
     public final void setTanggalLahir(int tanggal, int bulan, int tahun) {
         this.tanggalLahir = new Date(tahun,bulan,tanggal);

@@ -5,35 +5,62 @@
  */
 package Model;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  *
  * @author Vebby Clarissa 1301150439
  */
 public class Mahasiswa {
     private static int totalMahasiswa;
+    private int totalSKS; //di awal di set 0
     private long nim;
     private String nama;
     private boolean isMale;
-    private int tglLahir;
-    private int bulanLahir;
-    private int tahunLahir;
+    private Date tanggalLahir;
     private String tempatLahir;
     private String alamat;
-    private float ipk;
+//    private float ipk;
     private long noHp;
     private int angkatan;
     private boolean statusPembayaran;
-    private String dosenWali;
-//    private Jadwal jadwal;
+    private Dosen dosenWali;
+    private ArrayList<Jadwal> jadwal;
 
     public Mahasiswa(String nama, boolean isMale, int tglLahir, int bulanLahir, int tahunLahir, String tempatLahir) {
         this.nim = ++totalMahasiswa;
         this.nama = nama;
         this.isMale = isMale;
-        this.tglLahir = tglLahir;
-        this.bulanLahir = bulanLahir;
-        this.tahunLahir = tahunLahir;
+        setTanggalLahir(tglLahir, bulanLahir, tahunLahir);
         this.tempatLahir = tempatLahir;
+        this.totalSKS = 0;
+    }
+
+    public final void setTanggalLahir(int tanggal, int bulan, int tahun) {
+        this.tanggalLahir = new Date(tahun,bulan,tanggal);
+    }
+    public Date getTanggalLahir () {
+        return tanggalLahir;
+    }
+    
+    public void setDosenWali(Dosen d) {
+        this.dosenWali = d;
+    }
+    public Dosen getDosenWali () {
+        return this.dosenWali;
+    }
+    public boolean addJadwal(Jadwal j) {
+        if (totalSKS + j.getMatkul().getSKS() <= 24) {
+            this.totalSKS += j.getMatkul().getSKS();
+            jadwal.add(j);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public Jadwal getJadwalByIdx (int i) {
+        return this.jadwal.get(i);
     }
     
     public long getNim() {
@@ -55,31 +82,6 @@ public class Mahasiswa {
     public void setIsMale(boolean isMale) {
         this.isMale = isMale;
     }
-
-    public int getTglLahir() {
-        return tglLahir;
-    }
-
-    public void setTglLahir(int tglLahir) {
-        this.tglLahir = tglLahir;
-    }
-
-    public int getBulanLahir() {
-        return bulanLahir;
-    }
-
-    public void setBulanLahir(int bulanLahir) {
-        this.bulanLahir = bulanLahir;
-    }
-
-    public int getTahunLahir() {
-        return tahunLahir;
-    }
-
-    public void setTahunLahir(int tahunLahir) {
-        this.tahunLahir = tahunLahir;
-    }
-
     public String getTempatLahir() {
         return tempatLahir;
     }
@@ -96,13 +98,6 @@ public class Mahasiswa {
         this.alamat = alamat;
     }
 
-    public float getIpk() {
-        return ipk;
-    }
-
-    public void setIpk(float ipk) {
-        this.ipk = ipk;
-    }
 
     public long getNoHp() {
         return noHp;
@@ -127,14 +122,5 @@ public class Mahasiswa {
     public void setStatusPembayaran(boolean statusPembayaran) {
         this.statusPembayaran = statusPembayaran;
     }
-
-    public String getDosenWali() {
-        return dosenWali;
-    }
-
-    public void setDosenWali(String dosenWali) {
-        this.dosenWali = dosenWali;
-    }
-
     
 }

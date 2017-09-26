@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ENDRIAWAN
@@ -13,7 +15,7 @@ public class MataKuliah {
     private  int kodeMk;
     private String namaMk;
     private int SKS;
-    private Dosen[] dosenMk;
+    private Dosen dosen; //ga usah array, soalnya di satu jadwal cuma ada 1 mahasiswa dengan 1 dosen
 
     public int getKodeMk() {
         return kodeMk;
@@ -38,11 +40,14 @@ public class MataKuliah {
     public void setSKS(int SKS) {
         this.SKS = SKS;
     }
+
+    public void setDosen(Dosen dosen) {
+        this.dosen = dosen;
+    }
+
+    public Dosen getDosen() {
+        return dosen;
+    }
     
-    public void addDosen(Dosen d){ //belum selesai
-        dosenMk[jumlahdosen]=d;
-    }
-    public int getDosenByIdx(int idx){ //belum selesai
-        return dosenMk[idx];
-    }
+    
 }
